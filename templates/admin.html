@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %} Admin {% endblock %}
+
+{% block content %}
+<div class="title text-center">
+    <h1>The admin page</h1>
+    <div class="text-center">
+        <a class="btn btn-danger shadow-lg" href="/dashboard" role="button">
+            Member mode
+        </a>
+        <a class="btn btn-danger shadow-lg" href="/cam2" role="button">
+            Cam2
+        </a>
+        <a class="btn btn-primary shadow-lg" href="/eventlist" role="button"> Event list </a>
+    </div>
+</div>
+
+<div class="card-wrapper admin-card-wrapper">
+
+    <!--h2 class="card-title text-center mt-3"> Member List </h2-->
+    <div class="card shadow mx-auto">
+        <h2 class="card-title text-center mt-3"> Member List </h2>
+
+        <!-- print out all members -->
+        <div class="member-list fixTableHead">
+            <table class="table table-hover member-table">
+                <thead>
+                    <tr>
+                        <th> No. </th>
+                        <th> Name </th>
+                        <th> Email </th>
+                        <th> Action </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for members in members %}
+                    <tr style="border: 10px, black;">
+                        <td id="number-col"> {{ loop.index }} </td>
+                        <td id="member-name-col"> {{ members["name"] }} </td>
+                        <td id="member-email-col"> {{ members["email"] }} </td>
+                        <td>
+                            <!-- buttons -->
+                            <!--buttons type="button" class="btn btn-success btn-sm member-list-info"> Info </buttons>
+                            <buttons type="button" class="btn btn-danger btn-sm member-list-delete"> Delete </buttons-->
+                            <a href="/get_member/{{ members["email"] }}" class="btn btn-success"> Info </a>
+                            <a href="/delete_member/{{ members["email"] }}" class="btn btn-danger"> Delete </a>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!--未來是希望可以變成彈跳小視窗就好 因為每按一次Member list就會重整-->
+    <div class="card shadow mx-auto member-info">
+        <h2 class="card-title text-center mt-3"> Member Information </h2>
+        {% if member_info %}
+
+            <p class="member-info py-6 ms-10">
+                <strong> Member name: </strong> {{ member_info["name"] }}<br>
+                <strong> Member email: </strong> {{ member_info["email"] }}<br>
+                <strong> Member phone: </strong> {{ member_info["phone"] }} <br>
+                <strong> Member address:  </strong> {{ member_info["address"] }} <br>
+                <strong> Member gender:  </strong> {{ member_info["gender"] }} <br>
+                <strong> Member birthday:  </strong> {{ member_info["birthday"] }} <br>
+            </p>
+
+        {% endif %}
+
+    </div>
+
+    <!--div class="card shadow mx-auto event-list fixTableHead">
+        <h2 class="card-title text-center mt-3"> Event List </h2>
+
+    </div-->
+
+</div>
+<br /><br /><br />
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %} Add event {% endblock %}
+
+{% block content %}
+
+<div class="card shadow mx-auto">
+    <h2 class="card-title text-center mt-3"> Add New Event </h2>
+
+    <form method="POST" name="add_event_form" enctype="multipart/form-data">
+
+        <!--Title-->
+        <div class="form-floating form-group mt-1">
+
+            <input type="text" class="form-control" id="title" name="title" placeholder="example_title" required>
+            <label for="title"> Title </label>
+        </div>
+
+        <!--Category-->
+        <div class="form-floating form-group mt-3">
+            <select class="form-select" aria-label="select category" id="category" name="category">
+                <option value="1"> 華語 </option>
+                <option value="2"> 韓國 </option>
+                <option value="3"> 日本 </option>
+                <option value="4"> 西洋 </option>
+            </select>
+            <label for="gender"> Select your Category </label>
+        </div>
+
+        <!--Time-->
+        <div class="form-floating form-group mt-3">
+            <input type="datetime-local" class="form-control" id="time" name="time" placeholder="YYYY-MM-DD HH:MM:SS" required>
+            <label for="time"> Time </label>
+        </div>
+
+        <!--Ticket Time-->
+        <div class="form-floating form-group mt-3">
+            <input type="datetime-local" class="form-control" id="ticket_time" name="ticket_time" placeholder="YYYY-MM-DD HH:MM:SS" required>
+            <label for="ticket_time"> Ticket time </label>
+        </div>
+
+        <!--Ticket Price-->
+        <div class="form-floating form-group mt-3" id="ticket-type-fields">
+            <div class="row ticket-type-row">
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="ticket-type-name" placeholder="Ticket Type Name" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="ticket-type-price" placeholder="Ticket Type Price" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" name="ticket-type-amount" placeholder="Ticket Type Amount" required>
+                </div>
+            </div>
+        </div>
+
+
+        <button type="button" onclick="addTicketTypeField()" class="btn btn-primary">增加新票種</button>
+
+        <!--Description-->
+        <div class="form-floating form-group mt-3">
+            <input type="text" class="form-control" id="description" name="description" placeholder="description" required>
+            <label for="description"> Description </label>
+        </div>
+
+        <!--Notices-->
+        <div class="form-floating form-group mt-3">
+            <input type="text" class="form-control" id="notices" name="notices" placeholder="notices" required>
+            <label for="notices"> Notices </label>
+        </div>
+
+        <!--File Upload-->
+        <div class="form-floating form-group mt-3">
+            <input type="file" class="form-control" id="photo" name="photo" accept="image/jpeg" required>
+        </div>
+
+
+        <p class="error error--hidden mt-3 mb-0"></p>
+
+        <div class="text-center mt-3 mb-0">
+            <button type="submit" class="btn btn-primary add-event-confirm shadow"> Create </button>
+            <button type="reset" class="btn btn-secondary add-event-confirm shadow"> Clear </button>
+        </div>
+
+    </form>
+
+</div>
+
+<br><br><br><br>
+<script>
+    function addTicketTypeField() {
+        const ticketFields = document.getElementById('ticket-type-fields');
+        const newTicketTypeRow = document.createElement('div');
+        newTicketTypeRow.classList.add('row', 'ticket-type-row'); // 添加 row 類別
+
+        const col1 = document.createElement('div');
+        col1.classList.add('col-md-4');
+        const inputName = document.createElement('input');
+        inputName.type = 'text';
+        inputName.classList.add('form-control');
+        inputName.name = 'ticket-type-name';
+        inputName.placeholder = 'Ticket Type Name';
+        inputName.required = true;
+        col1.appendChild(inputName);
+
+        const col2 = document.createElement('div');
+        col2.classList.add('col-md-4');
+        const inputPrice = document.createElement('input');
+        inputPrice.type = 'text';
+        inputPrice.classList.add('form-control');
+        inputPrice.name = 'ticket-type-price';
+        inputPrice.placeholder = 'Ticket Type Price';
+        inputPrice.required = true;
+        col2.appendChild(inputPrice);
+
+        const col3 = document.createElement('div');
+        col3.classList.add('col-md-4');
+        const inputAmount = document.createElement('input');
+        inputAmount.type = 'text';
+        inputAmount.classList.add('form-control');
+        inputAmount.name = 'ticket-type-amount';
+        inputAmount.placeholder = 'Ticket Type Amount';
+        inputAmount.required = true;
+        col3.appendChild(inputAmount);
+
+        newTicketTypeRow.appendChild(col1);
+        newTicketTypeRow.appendChild(col2);
+        newTicketTypeRow.appendChild(col3);
+
+        ticketFields.appendChild(newTicketTypeRow);
+    }
+</script>
+
+{% endblock %}

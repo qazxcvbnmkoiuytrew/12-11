@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} Update | FRSTP {% endblock %}
+
+{% block content %}
+
+<div class="card-wrapper">
+
+  <!--div class="text-section">
+    <p>這裡是您想要放在左側的文字。</p>
+  </div-->
+
+  <div class="card shadow mx-auto">
+
+    <!--h1 class="center">修改會員資料</h1-->
+    <h2 class="card-title text-center mt-3"> Edit Event </h2>
+
+    <form name="modify_event_form" method="POST">
+
+      <div class="form-group mt-0">
+      <label for="title">Title</label>
+        <input type="text" name="title" class="field form-control" value="{{ event.title }}" required>
+      </div>
+
+      <div class="form-group mt-3">
+        <label for="time">Time</label>
+        <input type="email" name="time" class="field form-control" value="{{ event.time }}" readonly>
+      </div>
+
+      <p class="error error--hidden"></p>
+
+      <div class="text-center mt-3 mb-0">
+        <button type="submit" class="btn btn-primary edit-confirm shadow"> Edit </button>
+        <!--button type="reset" class="btn btn-secondary mt-3"> Clear All </button-->
+      </div>
+
+      <!--input type="submit" value="修改" class="btn"-->
+    </form>
+  </div>
+</div>
+
+<br><br><br><br>
+
+{% endblock %}

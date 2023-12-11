@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %} Login | FRSTP {% endblock %}
+
+{% block content %}
+
+<div class="card shadow mx-auto">
+    <h2 class="card-title text-center mt-3"> Member Login </h2>
+
+    <form method="POST" name="login_form">
+
+        <!--Email-->
+        <div class="form-floating form-group mt-1">
+            <input type="email" class="form-control field" id="email" name="email" placeholder="example@example.com" required>
+            <label for="email"> Email </label>
+        </div>
+
+        <!--Password-->
+        <div class="form-floating form-group mt-3">
+            <input type="password" class="form-control field" id="password" name="password" placeholder="password" required>
+            <label for="password"> Password </label>
+        </div>
+
+        <p class="error error--hidden mt-2 mb-0"></p>
+
+        <div class="text-center mt-3 mb-0">
+            <button type="submit" class="btn btn-primary login-confirm shadow"> Confirm </button>
+            <!--button type="reset" class="btn btn-secondary mt-3"> Clear All </button-->
+        </div>
+
+    </form>
+
+    <hr class="card-divider">
+
+    <div class="text-center">
+        <a class="btn btn-secondary shadow-lg" href="/register" role="button"> Create an account </a>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %} Member Profile | FRSTP {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Pi Video Surveillance</h1>
+
+    <div class="video-container">
+        <img style="max-width: 100%;" src="{{ url_for('video_feed') }}" id="video_feed">
+        {% if taken_photo %}
+            <img src="{{ url_for('static', filename=taken_photo) }}" style="max-width: 400px; display: block;" id="taken_photo">
+        {% endif %}
+    </div>
+
+    <br>
+    <form id="photo-form">
+        <button type="button" onclick="takePhoto()" id="take-photo-btn">拍照</button>
+        <button type="button" onclick="savePhoto()" id="save-photo-btn" class="hidden">儲存照片</button>
+        <button type="button" onclick="retakePhoto()" id="retake-photo-btn" class="hidden">重拍一張</button>
+    </form>
+</div>
+<style>
+    .container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .video-container {
+        display: inline-block;
+        text-align: center;
+        position: relative;
+    }
+
+    #video_feed {
+        max-width: 100%;
+    }
+
+    /* 样式其他元素以使其在页面中居中 */
+</style>
+<script>
+    var isPhotoTaken = true; // 用于跟踪是否已经拍摄了照片
+    function takePhoto() {
+        fetch('/take_photo', { method: 'POST' })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Received data:', data);
+                var videoFeedElement = document.getElementById('video_feed');
+                var takenPhotoElement = document.getElementById('taken_photo');
+                // 隐藏摄像头画面
+                videoFeedElement.style.display = 'block';
+                // 显示拍摄的照片
+                takenPhotoElement.style.display = 'block';
+                takenPhotoElement.src = data; // 设置照片的 src 属性
+                isPhotoTaken = true; // 设置标志为已拍摄
+
+
+                document.getElementById('save-photo-btn').classList.remove('hidden');
+                document.getElementById('retake-photo-btn').classList.remove('hidden');
+            });
+    }
+
+    function savePhoto() {
+        if (isPhotoTaken) {
+            fetch('/save_photo', { method: 'POST' })
+            .then(response => response.text())
+            .then(data => {
+                // 照片保存成功后再进行页面重定向
+                window.location.href = "/memberprofile/";
+            });
+        }
+    }
+
+    function retakePhoto() {
+        if (isPhotoTaken) {
+            fetch('/retake_photo', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('video_feed').style.display = 'block'; // 显示视频流画面
+                    document.getElementById('taken_photo').style.display = 'none'; // 隐藏照片
+                    document.getElementById('taken_photo').src = ''; // 清除照片
+                    isPhotoTaken = false; // 设置标志为未拍摄
+                });
+        }
+    }
+</script>
+
+
+{% endblock %}

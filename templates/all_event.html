@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %} 節目資訊 {% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div>
+        <br><br>
+    </div>
+
+    <div>
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pills-all-tab" data-bs-toggle="pill" data-bs-target="#pills-all" type="button" role="tab" aria-controls="pills-all" aria-selected="true">全部活動</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-chinese-tab" data-bs-toggle="pill" data-bs-target="#pills-chinese" type="button" role="tab" aria-controls="pills-chinese" aria-selected="false">華語</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-korean-tab" data-bs-toggle="pill" data-bs-target="#pills-korean" type="button" role="tab" aria-controls="pills-korean" aria-selected="false">韓國</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-japanese-tab" data-bs-toggle="pill" data-bs-target="#pills-japanese" type="button" role="tab" aria-controls="pills-japanese" aria-selected="false">日本</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-western-tab" data-bs-toggle="pill" data-bs-target="#pills-western" type="button" role="tab" aria-controls="pills-western" aria-selected="false">西洋</button>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab" >
+            <div class="row">
+            {% for event in all_events %}
+                <div class="col-md-4 mb-4">
+                    <a href="/event/{{ event._id }}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                <p class="card-text">{{ event.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+            <!-- 在此添加所有活動的內容
+            <div class="card" style="width: 18rem;">
+                <img src="https://static.tixcraft.com/images/activity/24_orkh_e9d8edd390447dd53227b75002cd61f3.jpg" class="card-img-top" alt="ONEREPUBLIC">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+             添加更多卡片以列出其他活動 -->
+        </div>
+
+        <div class="tab-pane fade" id="pills-chinese" role="tabpanel" aria-labelledby="pills-chinese-tab">
+            <div class="row">
+            {% for event in chinese_events %}
+                <div class="col-md-4 mb-4">
+                    <a href="/event/{{ event._id }}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                <p class="card-text">{{ event.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+            <!-- 在此添加所有活動的內容
+            <div class="card" style="width: 18rem;">
+                <img src="https://static.tixcraft.com/images/activity/24_orkh_e9d8edd390447dd53227b75002cd61f3.jpg" class="card-img-top" alt="ONEREPUBLIC">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+             在此添加華語活動的內容 -->
+        </div>
+
+        <div class="tab-pane fade" id="pills-korean" role="tabpanel" aria-labelledby="pills-korean-tab">
+            <!-- 在此添加韓國活動的內容 -->
+            <div class="row">
+            {% for event in korean_events %}
+                <div class="col-md-4 mb-4">
+                    <a href="/event/{{ event._id }}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                <p class="card-text">{{ event.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="pills-japanese" role="tabpanel" aria-labelledby="pills-japanese-tab">
+            <!-- 在此添加日本活動的內容 -->
+            <div class="row">
+            {% for event in japanese_events %}
+                <div class="col-md-4 mb-4">
+                    <a href="/event/{{ event._id }}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                <p class="card-text">{{ event.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-western" role="tabpanel" aria-labelledby="pills-western-tab">
+            <!-- 在此添加西洋活動的內容 -->
+            <div class="row">
+            {% for event in western_events %}
+                <div class="col-md-4 mb-4">
+                    <a href="/event/{{ event._id }}">
+                        <div class="card" style="width: 18rem;">
+                            <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                            <div class="card-body">
+                                <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                <p class="card-text">{{ event.title }}</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+            </div>
+    </div>
+</div>
+
+{% endblock %}

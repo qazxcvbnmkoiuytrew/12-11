@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- Font-Awesome CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!--link rel="stylesheet" href="static/css/newstyle.css"-->
+        <!--link rel="stylesheet" href="/static/css/normalize.css">
+        <!--link rel="stylesheet" href="/static/css/styles.css">
+        <link rel="stylesheet" href="/static/css/card.css">
+        <link rel="stylesheet" href="/static/css/newstyles.css"-->
+        <link rel="stylesheet" href="/static/css/style.css">
+
+        <title> {% block title %} Base {% endblock %} | BioTIX </title>
+        <link rel="shortcut icon" href="\static\icon\BioTIX_icon.png" type="static/icon/BioTIX_icon.png">
+
+
+    </head>
+
+    <body>
+
+        <!--navbar裡面的東西用container包起來-->
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+
+                <!--logo-->
+                <a
+                    class="fa fa-home"
+                    href="/"
+                    data-toggle="tooltip"
+                    data-placement="right"
+                    title="Home">
+                    <title> Home </title>
+                </a>
+
+                <!-- Links -->
+                <div class="collapse navbar-collapse bg-faded" id="mynavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="/all_event"> 活動資訊 </a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="#"> Link2 </a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <a class="nav-link" href="#"> Link3 </a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <form method="POST" action="/search" class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" name="keyword" placeholder="搜尋活動" class="form-control">
+                                    <button type="submit" class="btn btn-primary">搜索</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--User profile和Ticket兩個按鈕-->
+                <div class="btn-group">
+                    <a
+                        type="button"
+                        class="fa fa-user-circle dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        data-bs-display="static"
+                        aria-expanded="false"
+                        data-toggle="tooltip" data-placement="left" title="User Menu">
+                        <title> User Profile </title>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% if session.logged_in %}
+                        <li>
+                            <p class="dropdown-header">
+                                {% if user_email == 'ncumis.team17@gmail.com' %}
+                                Admin :
+                                {% else %}
+                                Member :
+                                {% endif %}
+                                <span  id="dropdown_user_name"></span>
+                            </p>
+                        </li>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/memberprofile"> View membership </a></li>
+                        <li><a class="dropdown-item" href="/user/update_user"> Edit profile </a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/signout"> Log out </a></li>
+
+                        {% else %}
+                        <li><p class="dropdown-header pt-1 pb-1"> Guest </p></li>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item disabled" href="/memberprofile"> View membership </a></li>
+                        <li><a class="dropdown-item disabled" href="/user/update_user"> Edit profile </a></li>
+
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/user/login"> Log in/Register </a></li>
+
+                        {% endif %}
+                    </ul>
+
+                    <a
+                        class="fa fa-ticket mx-3"
+                        href="/order"
+                        data-toggle="tooltip" data-placement="right" title="Ticket">
+                        <title> Ticket </title>
+                    </a>
+
+                </div>
+
+            </div>
+        </nav>
+
+        {% block content %}
+
+        {% endblock %}
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="/static/js/jquery.js"></script>
+        <script src="/static/js/script.js"></script>
+
+        <script>
+            // 解析JSON數據並顯示在網頁上
+            var userInfoStr = '{{ session["user"] | safe }}'; // 使用 safe 過濾器以避免意外的 JavaScript 轉義
+            var userInfo = JSON.parse(userInfoStr);
+
+            // 在HTML中顯示JSON數據
+            document.getElementById("dropdown_user_name").innerText = userInfo.name;
+        </script>
+
+</html>

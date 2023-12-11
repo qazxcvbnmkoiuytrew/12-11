@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %} Member Profile | FRSTP {% endblock %}
+
+{% block content %}
+    <h1>Face Recognition</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <img src="{{ url_for('video_feed2') }}" width="640" height="480">
+        <a class="btn btn-primary" href="/memberprofile/" role="button">返回 Dashboard</a>
+    </div>
+{% endblock %}

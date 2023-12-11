@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %} Home | FRSTP {% endblock %}
+
+{% block content %}
+
+    <!--div class="card-wrapper"-->
+    <!--div class="card mx-auto"-->
+    <div class="container">
+        <br>
+        <div class="col-sm-12">
+            <div id="carouselInterval" class="carousel slide" data-bs-ride="carousel" >
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselInterval" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselInterval" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselInterval" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="2000"  >
+                <picture>
+                    <source media="(min-width: 780px)" srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/2023100602082610981142x314.jpg'></source>
+                    <source media='(min-width: 465px)' srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310060208261098800x314.jpg'></source>
+                    <img src="https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310060208261098414x314.jpg" class="img-fluid" alt="slide">
+                </picture>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000" >
+                <picture>
+                    <source media="(min-width: 780px)" srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/2023101608421100691142x314.jpg'></source>
+                    <source media='(min-width: 465px)' srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310160842110069800x314.jpg'></source>
+                <img  src="https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310160842110069414x314.jpg"  class="img-fluid" alt="slide">
+                </picture>
+            </div>
+            <div class="carousel-item" >
+                <picture>
+                    <source media="(min-width: 780px)" srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/2023101309381288711142x314.jpg'></source>
+                    <source media='(min-width: 465px)' srcset='https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310130938129027800x314.jpg'></source>
+                <img  src="https://imgs2.utiki.com.tw/Data/ERA//Images/ADImages/202310130938129027414x314.jpg" class="img-fluid" alt="slide">
+                </picture>
+            </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselInterval" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselInterval" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+       </div>
+            <!--a href="/user/register" class="btn btn--secondary" methods="post">Register</a-->
+            <!--a href="/user/login" class="btn btn--secondary">Log in</a-->
+        </div>
+
+        <div class="container">
+            <br>
+            <hr>
+            <h2 class="center"> 最新消息</h2>
+        </div>
+
+        <div class="container">
+            <br>
+            <hr>
+            <h2 class="center"> 節目資訊 </h2>
+            <br>
+            <div>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-recent-event-tab" data-bs-toggle="pill" data-bs-target="#pills-recent-event" type="button" role="tab" aria-controls="pills-recent-event" aria-selected="true">近期活動</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-recent-sale-tab" data-bs-toggle="pill" data-bs-target="#pills-recent-sale" type="button" role="tab" aria-controls="pills-recent-sale" aria-selected="false">近期開賣</button>
+                    </li>
+                </ul>
+            </div>
+
+
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-recent-event" role="tabpanel" aria-labelledby="pills-recent-event-tab" >
+                    <div class="row">
+                    {% for event in recent_event %}
+                        <div class="col-md-4 mb-4">
+                            <a href="/event/{{ event._id }}">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                                    <div class="card-body">
+                                        <p class="card-text" style="color: black;">{{ event.time }}</p>
+                                        <p class="card-text">{{ event.title }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-recent-sale" role="tabpanel" aria-labelledby="pills-recent-sale-tab">
+                    <div class="row">
+                    {% for event in recent_sale %}
+                        <div class="col-md-4 mb-4">
+                            <a href="/event/{{ event._id }}">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/event/{{ event._id }}/image" class="card-img-top" alt="{{ event.title }}">
+                                    <div class="card-body">
+                                        <p class="card-text" style="color: black;">{{ event.ticket_time }}</p>
+                                        <p class="card-text">{{ event.title }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} Register | FRSTP {% endblock %}
+
+{% block content %}
+
+<div class="card shadow mx-auto">
+    <h2 class="card-title text-center mt-3"> Create Your Own Account </h2>
+
+    <form method="POST" name="signup_form">
+
+        <!--Name-->
+        <div class="form-floating form-group mt-1">
+
+            <input type="text" class="form-control" id="name" name="name" placeholder="example_name" required>
+            <label for="name"> Name </label>
+        </div>
+
+        <!--Email-->
+        <div class="form-floating form-group mt-3">
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@example.com" required>
+            <label for="email"> Email </label>
+        </div>
+
+        <!--Password-->
+        <div class="form-floating form-group mt-3">
+            <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+            <label for="password"> Password </label>
+        </div>
+
+        <!--ConfirmPassword-->
+        <div class="form-floating form-group mt-3">
+            <input type="password" class="form-control" id="password_confirm" name="password_confirm"
+                placeholder="password_confirm" required>
+            <label for="password_confirm"> Confirm Password </label>
+        </div>
+
+        <!--Phone-->
+        <div class="form-floating form-group mt-3">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="09XX-XXX-XXX" required>
+            <label for="phone"> Phone Number </label>
+        </div>
+
+        <!--Address-->
+        <div class="form-floating form-group mt-3">
+            <input type="text" class="form-control" id="address" name="address" placeholder="address" required>
+            <label for="address"> Address </label>
+        </div>
+
+
+        <!--Gender-->
+        <div class="form-floating form-group mt-3">
+            <select class="form-select" aria-label="select gender" id="gender" name="gender">
+                <option value="Male"> Male </option>
+                <option value="Female"> Female </option>
+                <option value="Other"> Other </option>
+            </select>
+            <label for="gender"> Select your gender </label>
+        </div>
+
+        <!--Birthday-->
+        <div class="form-floating form-group mt-3">
+            <input type="date" class="form-control" id="birthday" name="birthday" placeholder="address">
+            <label for="birthday"> Birthday </label>
+        </div>
+
+        <p class="error error--hidden mt-3 mb-0"></p>
+
+        <div class="text-center mt-3 mb-0">
+            <button type="submit" class="btn btn-primary signin-confirm shadow"> Sign Up </button>
+            <!--button type="reset" class="btn btn-secondary mt-3"> Clear All </button-->
+        </div>
+
+    </form>
+
+    <hr class="custom-line">
+
+    <div class="text-center">
+        <a class="btn btn-secondary shadow-lg" href="/user/login" role="button"> Already Have an Account </a>
+    </div>
+
+</div>
+
+<br><br><br><br>
+
+{% endblock %}

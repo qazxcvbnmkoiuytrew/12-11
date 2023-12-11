@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %} Event Details {% endblock %}
+
+{% block content %}
+<div class="container">
+    <a href="/modify_event/{{ event._id }}" class="btn btn-primary">修改活動</a>
+
+    <h1 class="text-center">活動資訊</h1>
+
+    <div class="event-block" style="background-color: black; color: white; border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);">
+        <h2 class="event-title">Title</h2>
+        <p class="event-description">{{ event.title }}</p>
+        <img src="{{ url_for('get_event_image', event_id=event._id) }}" alt="Event Image" style="width: 1000px; height: 562px; margin: 0 auto; display: block;"/>
+    </div>
+
+    <div class="event-block" style="background-color: #fff; border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); background: linear-gradient(to bottom, #f8f8f8, #fff);">
+        <h2 class="event-title">Description</h2>
+        <p class="event-description">{{ event.description }}</p>
+    </div>
+
+    <div class="event-block" style="background: linear-gradient(to bottom, #ffffff, #ffffff); padding: 20px; border: 1px solid #c7d2ff; border-radius: 10px;">
+        <h2 class="event-title">Notices</h2>
+        <p class="event-description">{{ event.notices }}</p>
+    </div>
+
+    <div class="event-block" style="background: linear-gradient(to bottom, #ffffff, #ffffff); padding: 20px; border: 1px solid #c7d2ff; border-radius: 10px;">
+        <h2 class="event-title">Other Details</h2>
+        <p class="event-description"><strong>Time:</strong> {{ event.time }}</p>
+        <p class="event-description"><strong>Ticket Time:</strong> {{ event.ticket_time }}</p>
+        <p class="event-description"><strong>Ticket Price:</strong> {{ event.ticket_price }}</p>
+        <p class="event-description"><strong>Ticket Amount:</strong> {{ event.ticket_amount }}</p>
+    </div>
+</div>
+{% endblock %}

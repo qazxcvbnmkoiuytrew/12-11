@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %} Member Profile | FRSTP {% endblock %}
+
+{% block content %}
+    <h1>Face Recognition</h1>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 640px;">
+            <img src="{{ url_for('video_feedtest', event_id=event_id) }}" width="640" height="480">
+            <a class="btn btn-primary" href="/memberprofile/" role="button">返回 Dashboard</a>
+        </div>
+        <div style="width: calc(100% - 640px); height: 480px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
+            <h2>辨識結果</h2>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        socket.on('seat_member_found', function(data) {
+            const resultDiv = document.getElementById('result');
+            // 將新的結果附加到已有的內容上，最多顯示五行
+            const newResult = document.createElement('div');
+            newResult.textContent = data.message;
+            resultDiv.prepend(newResult);
+
+            // 如果超過五行，移除最舊的結果以保持最多五行顯示
+            if (resultDiv.children.length > 5) {
+                resultDiv.removeChild(resultDiv.lastElementChild);
+            }
+        });
+    </script>
+{% endblock %}

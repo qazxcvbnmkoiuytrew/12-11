@@ -1,0 +1,94 @@
+body{
+    background-image: url("image/expanding-brain.jpg");
+}
+
+.navbar-toggler{
+    color:white;
+}
+
+.navbar{
+    height:70px;
+    background-color: steelblue;
+}
+
+.nav-link{
+    color:white;
+    font-size:25px;
+}
+
+.navbar-brand{
+    color:darksalmon;
+}
+
+
+.dropdown-toggle::after {
+    content: none;
+}
+
+.dropdown-divider{
+    color:darkgrey;
+    border-width:2px;
+}
+
+.fa{
+    font-size: 40px;
+    color:white;
+    margin-left:5px;
+    margin-right:5px;
+    text-decoration: none;
+}
+
+.fa:hover, .fa:active{
+    /*font-size: 300%;*/
+    color:deepskyblue;
+}
+
+.container{
+    background-color:blanchedalmond;
+    height:auto;
+
+    /*
+    width:650px;
+    margin-top:30px;
+    padding:30px 30px;
+    */
+}
+
+/* LOGO */
+nav > div > a > img{
+    color: white;
+    background-color: white;
+}
+
+.title{
+    background-color:greenyellow;
+}
+
+.form-group{
+    margin:10px 0px;
+}
+
+
+
+/*/////////////////*/
+
+
+
+.card-wrapper {
+    display: flex;
+    background-color: darkcyan;
+    padding:5px 5px 5px 0px;
+    height:100%;
+  }
+
+  .text-section {
+    flex: 1;
+    /* 使文本部分和卡片各佔一半的空間。您可以根據需要調整比例 */
+
+  }
+
+  .card {
+    flex: 1;
+    /* 使文本部分和卡片各佔一半的空間 */
+    margin:5px;
+  }

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %} Search Results {% endblock %}
+
+{% block content %}
+<div class="p-5 text-center border-bottom" id="my">
+    <h1>Bootstrap 教學課程</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead m-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s
+            most popular
+            front-end
+            open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt
+            components, and powerful JavaScript plugins.</p>
+        <button class="btn btn-primary btn-lg">看更多</button>
+    </div>
+</div>
+
+<style>
+    .card {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    .card .card-img-top {
+        object-fit: cover;
+    }
+
+    .card a {
+        background-color: #f0f0f0; /* 更改链接的背景颜色为淡灰色 */
+    }
+
+    .activity-date {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 5px;
+        display: none;
+        z-index: 1;
+    }
+</style>
+
+<div class="p-5" id="project">
+    <div class="container">
+        <div class="row g-4">
+            {% for result in results %}
+                <div class="col-lg-4">
+                    <div class="card shadow-lg" style="position: relative;">
+                        <a href="/event/{{ result._id }}" class="btn btn-primary">
+                            <img class="group list-group-image" src="/event/{{ result._id }}/image" alt="" style="width: 300px; height: 225px;">
+                            <span class="activity-date">{{ result.category }}</span>
+                        <img src="{{ result.image_url }}" alt="" class="card-img-top">
+                        <div class="card-body" style="position: relative;">
+                            <h3 class="card-title">{{ result.title }}</h3>
+                            <p class="card-text">{{ result.description }}</p>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // 获取所有带有活动日期的元素
+    var activityDates = document.querySelectorAll('.activity-date');
+
+    // 为每个元素添加鼠标悬停事件监听器
+    activityDates.forEach(function(activityDate) {
+        activityDate.parentElement.addEventListener('mouseenter', function() {
+            activityDate.style.display = 'block';
+        });
+
+        activityDate.parentElement.addEventListener('mouseleave', function() {
+            activityDate.style.display = 'none';
+        });
+    });
+</script>
+
+{% endblock %}
+
+
+
+
+

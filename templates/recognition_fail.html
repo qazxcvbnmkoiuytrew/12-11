@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>驗證失敗</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</body>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    Swal.fire({
+        title: '驗證非本人。請重新驗證',
+        text: '購票失敗',
+        icon: 'error',
+        confirmButtonText: '確定'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // 按下了“確定”按钮
+            window.location.href = " /membercam ";
+        }
+    });
+});
+</script>

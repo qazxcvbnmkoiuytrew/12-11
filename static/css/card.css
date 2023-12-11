@@ -1,0 +1,84 @@
+.card-wrapper {
+    display: flex;
+    align-items: start;
+    /* 如果您希望它們在頂部對齊 */
+}
+
+.text-section {
+    flex: 1;
+    /* 使文本部分和卡片各佔一半的空間。您可以根據需要調整比例 */
+    padding: 1rem;
+    /* 增加一些內邊距，使文字不太貼近卡片 */
+}
+
+.card {
+    flex: 1;
+    /* 使文本部分和卡片各佔一半的空間 */
+    padding: 1rem;
+    /* 適量的內邊距 */
+}
+
+.forgot-password {
+    text-decoration: none;
+    /* 預設時移除底線 */
+    color: blue;
+    /* 這裡設置連結的顏色，您可以根據需要調整 */
+    cursor: pointer;
+    /* 讓它看起來像一個可點擊的連結 */
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+    /* 當滑鼠移過去時，添加底線 */
+}
+
+.custom-line {
+    border: 0;
+    /* 移除預設的邊框 */
+    height: 1px;
+    /* 線條的厚度 */
+    background-color: #e0e0e0;
+    /* 淺灰色 */
+    width: 80%;
+    /* 使線條寬度為80% */
+    margin: 0 auto;
+    /* 使線條居中顯示 */
+}
+
+.btnn {
+    margin: 0 0 24px;
+    padding: 11px 30px 10px;
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    display: inline-block;
+    background: #4CAF50;
+    transition: color .15s ease, background-color .15s ease;
+}
+
+.btnn:hover {
+    background: #388e3c;
+    ;
+}
+
+.btnn--secondary {
+    color: var(--almost-black);
+    background: #a5d6a7;
+}
+
+.btnn--secondary:hover {
+    background: #81c784;
+}
+
+input[type=submit] {
+    margin: 34px auto 24px;
+    display: block;
+}

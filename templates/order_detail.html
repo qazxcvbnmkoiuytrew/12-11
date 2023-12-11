@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %} Purchase Details {% endblock %}
+
+{% block content %}
+<style>
+    /* Add your CSS styling here */
+    table {
+        width: 85%;
+        border-collapse: collapse;
+        height: 100px;
+        margin: 20px 100px 100px 100px;
+    }
+
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .taller-row td {
+        height: 50px;
+        /* or whatever height you want */
+    }
+
+    .dd {
+        margin-left: 105px;
+        margin-top: 60px;
+    }
+</style>
+<div class="dd">
+    <p style="font-size:25px;">
+        <span style="text-decoration:underline;">訂單詳細資訊</span>
+    </p>
+</div>
+<table>
+    <tr>
+        <th>訂單編號</th>
+        <th>訂購時間</th>
+        <th>場次</th>
+        <th>區域</th>
+        <th>座位</th>
+        <th>訂購張數</th>
+        <th>金額</th>
+        <th>訂單狀態</th>
+    </tr>
+    {% for order in orders %}
+    <tr class="taller-row">
+        <td>{{ order['order_id'] }}</td>
+        <td>{{ order['order_created_at'] }}</td>
+        <td>{{ order['event']['title']|safe }}</td>
+        <td>{{ order['area'] }}</td>
+        <td>{{ order['seat'] }}</td>
+        <td>{{ order['num_tickets'] }}</td>
+        <td>{{ order['total_amount'] }}</td>
+        <td>
+            {% if order['order_status'] == 1 and order['order_expired_at'] > current_time %}
+                <a href="{{ order['event']['_id'] }}/checkout?price={{ order['total_amount'] }}&name={{ order['area'] }}&amount={{ order['num_tickets'] }}&seat_num={{ order['seat'] }}"><span style="color: red;">訂單未完成</span></a>
+            {% elif order['order_status'] == 2 %}
+                訂單完成
+            {% elif order['order_status'] == 0 or order['order_expired_at'] <= current_time %}
+                已取消
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

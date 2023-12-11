@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %} Event Details {% endblock %}
+
+{% block content %}
+<style>
+    .ticket-label {
+        font-size: 40px; /* 设置票价和票种名称的字体大小 */
+    }
+</style>
+<div class="container">
+    <h1 class="text-center">活動資訊</h1>
+
+    <div class="event-block" style="background-color: black; color: white; border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);">
+        <h2 class="event-title">Title</h2>
+        <p class="event-description">{{ event.title }}</p>
+        <img src="{{ url_for('get_event_image', event_id=event._id) }}" alt="Event Image" style="width: 1000px; height: 562px; margin: 0 auto; display: block;"/>
+    </div>
+
+    <div class="event-block" style="background: linear-gradient(to bottom, #ffffff, #ffffff); padding: 20px; border: 1px solid #c7d2ff; border-radius: 10px;">
+        <h2 class="event-title">Other Details</h2>
+        <p class="event-description"><strong>Time:</strong> {{ event.time }}</p>
+        <p class="event-description"><strong>Ticket Time:</strong> {{ event.ticket_time }}</p>
+
+        <label><strong>Ticket Price:</strong></label><br>
+        {% for ticket in event.ticket %}
+            <input type="radio" id="price{{ loop.index }}" name="ticketPrice" value="{{ ticket.price }}">
+            <label for="price{{ loop.index }}" class="ticket-label">{{ ticket.name }} - ${{ ticket.price }}</label><br>
+        {% endfor %}
+
+        <!-- 添加购买按钮 -->
+        <button onclick="checkTicketAvailability()">購買</button>
+    </div>
+</div>
+<script>
+function checkTicketAvailability() {
+    var selectedPrice, selectedName, seatNumber; // 新增座位編號變數
+    var priceOptions = document.getElementsByName('ticketPrice');
+    for (var i = 0; i < priceOptions.length; i++) {
+        if (priceOptions[i].checked) {
+            selectedPrice = priceOptions[i].value;
+            selectedName = priceOptions[i].nextElementSibling.textContent.split(' - ')[0].trim();
+            break;
+        }
+    }
+
+    if (!selectedPrice) {
+        alert('請選擇票價！');
+        return;
+    }
+
+    var eventId = '{{ event._id }}';
+    var xhr = new XMLHttpRequest();
+    var url = '/check_ticket_availability?event_id=' + eventId + '&ticket_name=' + selectedName;
+
+    xhr.open('GET', url, true);
+    xhr.send();
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.available) {
+                redirectToCheckout(selectedPrice, selectedName, response.seat_number); // 添加座位編號參數
+            } else {
+                alert('該票種已售罄，請選擇其他票種！');
+            }
+        }
+    };
+}
+
+function redirectToCheckout(price, name, seatNum) {
+    var encodedName = encodeURI(name);
+    var ticketAmount = 1;
+    var eventId = '{{ event._id }}';
+    window.location.href = '/' + eventId + '/checkout?price=' + price + '&name=' + encodedName + '&amount=' + ticketAmount + '&seat_num=' + seatNum;
+}
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+body {
+    background-color: #f5f5f5;
+}
+
+/* 事件区块样式 */
+.event-block {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    /* 添加渐变背景色 */
+    background: linear-gradient(to bottom, #f8f8f8, #fff);
+}
+
+/* 事件标题样式 */
+.event-title {
+    font-size: 28px;
+    color: #333;
+    margin-top: 0;
+}
+
+/* 事件描述样式 */
+.event-description {
+    font-size: 18px;
+    color: #666;
+}
+
+/* 为"Other Details" 区块添加不同的背景颜色 */
+.other-details {
+    background-color: #f1f8ff;
+    /* 添加渐变背景色 */
+    background: linear-gradient(to bottom, #e0f2ff, #f7fcff);
+    padding: 20px;
+    border: 1px solid #c7d2ff;
+    border-radius: 10px;
+}
+
